@@ -2,9 +2,11 @@
   "name": "express-api-demo",
   "packageManager": "yarn@4.2.2",
   "scripts": {
-    "start:local": "ts-node-dev --env-file=.env ./src/server.ts"
+    "start:dev": "ts-node-dev --env-file=.env ./src/server.ts"
   },
   "dependencies": {
+    "@apollo/server": "^4.12.2",
+    "@as-integrations/express5": "^1.1.0",
     "@faker-js/faker": "^9.8.0",
     "@mikro-orm/cli": "^6.4.16",
     "@mikro-orm/core": "^6.4.16",
@@ -12,10 +14,15 @@
     "@mikro-orm/postgresql": "^6.4.16",
     "@mikro-orm/seeder": "^6.4.16",
     "@mikro-orm/sql-highlighter": "^1.0.1",
-    "express": "^5.1.0"
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "graphql": "^16.11.0",
+    "graphql-scalars": "^1.24.2",
+    "type-graphql": "^2.0.0-rc.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",
+    "@types/cors": "^2",
     "@types/express": "^5.0.3",
     "@types/node": "^24.0.3",
     "@typescript-eslint/parser": "^8.34.0",
