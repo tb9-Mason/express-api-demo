@@ -1,6 +1,7 @@
 import type { EntityManager } from '@mikro-orm/core';
 import { Seeder } from '@mikro-orm/seeder';
-import { Artist } from 'src/entities';
+
+import { Artist } from '../entities';
 
 import { AlbumFactory, ArtistFactory, MemberFactory } from './factories';
 
