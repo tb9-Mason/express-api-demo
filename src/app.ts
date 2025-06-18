@@ -29,11 +29,28 @@ export async function init(port: string | number = 5000, migrate = true) {
     cors<cors.CorsRequest>(),
     express.json(),
     expressMiddleware<GqlContext>(gqlServer, {
-      context: async () => ({ em: db.em.fork() }),
+      context: async (params) => ({ em: db.em.fork(), ...params }),
     }),
   );
 
-  await app.listen({ port });
+  const server = app.listen({ port });
+
+  process.on('SIGINT', () => shutdown());
+  process.on('SIGTERM', () => shutdown());
+  process.on('exit', (code) => {
+    console.log(`Process exiting with code ${code}`);
+  });
+
+  const shutdown = async () => {
+    await gqlServer.stop();
+    console.log('GraphQL server stopped');
+    await db.orm.close();
+    console.log('DB closed');
+
+    server.close(() => {
+      process.exit(0);
+    });
+  };
 
   return { app, port };
 }

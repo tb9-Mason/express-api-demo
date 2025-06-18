@@ -37,6 +37,10 @@ type Member {
 }
 
 type Query {
+  album(id: String!): Album
+  albums: [Album!]
   artist(id: String!): Artist
   artists: [Artist!]!
+  member(id: String!): Member
+  members: [Member!]
 }
