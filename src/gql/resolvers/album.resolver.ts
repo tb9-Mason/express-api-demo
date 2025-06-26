@@ -13,13 +13,13 @@ export class AlbumResolver {
     return em.findOne(Album, id, { populate: relations });
   }
 
-  @Query((_returns) => [Album], { nullable: true })
+  @Query((_returns) => [Album!]!)
   albums(@Ctx() { em }: GqlContext, @Info() info: GraphQLResolveInfo) {
     const relations = fieldsToRelations<Album>(info, Album, em);
     return em.findAll(Album, { populate: relations });
   }
 
-  @FieldResolver((_returns) => [Artist])
+  @FieldResolver((_returns) => Artist)
   async artist(@Root() album: Album, @Ctx() _ctx: GqlContext) {
     return album.artist;
   }

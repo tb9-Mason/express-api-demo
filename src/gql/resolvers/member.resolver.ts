@@ -13,13 +13,13 @@ export class MemberResolver {
     return em.findOne(Member, id, { populate: relations });
   }
 
-  @Query((_returns) => [Member], { nullable: true })
+  @Query((_returns) => [Member!]!)
   members(@Ctx() { em }: GqlContext, @Info() info: GraphQLResolveInfo) {
     const relations = fieldsToRelations<Member>(info, Member, em);
     return em.findAll(Member, { populate: relations });
   }
 
-  @FieldResolver((_returns) => [Artist])
+  @FieldResolver((_returns) => [Artist!]!)
   async artists(@Root() member: Member, @Ctx() _ctx: GqlContext) {
     return member.artists;
   }

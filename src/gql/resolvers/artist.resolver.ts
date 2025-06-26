@@ -1,7 +1,7 @@
 import { GraphQLResolveInfo } from 'graphql';
 import { Arg, Ctx, FieldResolver, Info, Query, Resolver, Root } from 'type-graphql';
 
-import { Artist, Member } from '../../entities';
+import { Album, Artist, Member } from '../../entities';
 import { GqlContext } from '../gql-server';
 import fieldsToRelations from '../utilities/fields-to-relations';
 
@@ -14,18 +14,18 @@ export class ArtistResolver {
     return em.findOne(Artist, id, { populate: relations });
   }
 
-  @Query((_returns) => [Artist])
+  @Query((_returns) => [Artist!]!)
   artists(@Ctx() { em }: GqlContext, @Info() info: GraphQLResolveInfo) {
     const relations = fieldsToRelations<Artist>(info, Artist, em);
     return em.findAll(Artist, { populate: relations });
   }
 
-  @FieldResolver((_returns) => [Member])
+  @FieldResolver((_returns) => [Member!]!)
   async members(@Root() artist: Artist, @Ctx() _ctx: GqlContext) {
     return artist.members;
   }
 
-  @FieldResolver((_returns) => [Member])
+  @FieldResolver((_returns) => [Album!]!)
   async albums(@Root() artist: Artist, @Ctx() _ctx: GqlContext) {
     return artist.albums;
   }
