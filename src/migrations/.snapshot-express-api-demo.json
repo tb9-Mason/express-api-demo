@@ -143,6 +143,37 @@
           "primary": false,
           "nullable": false,
           "mappedType": "uuid"
+        },
+        "static_rating": {
+          "name": "static_rating",
+          "type": "numeric(3,1)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "precision": 3,
+          "scale": 1,
+          "mappedType": "decimal"
+        },
+        "user_rating_total": {
+          "name": "user_rating_total",
+          "type": "int",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "default": "0",
+          "mappedType": "integer"
+        },
+        "num_ratings": {
+          "name": "num_ratings",
+          "type": "int",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "default": "0",
+          "mappedType": "integer"
         }
       },
       "name": "album",

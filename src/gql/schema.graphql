@@ -7,8 +7,12 @@ type Album {
   artist: Artist!
   createdAt: DateTimeISO!
   name: String!
+  numRatings: Float!
   releaseDate: DateTimeISO!
+  staticRating: Float!
   updatedAt: DateTimeISO!
+  userRating: Float!
+  userRatingTotal: Float!
   uuid: ID!
 }
 
@@ -36,6 +40,10 @@ type Member {
   uuid: ID!
 }
 
+type Mutation {
+  updateUserRating(data: UpdateUserRatingInput!): Album!
+}
+
 type Query {
   album(id: String!): Album
   albums: [Album!]!
@@ -43,4 +51,10 @@ type Query {
   artists: [Artist!]!
   member(id: String!): Member
   members: [Member!]!
+}
+
+"""User rating update parameters"""
+input UpdateUserRatingInput {
+  rating: Float!
+  uuid: String!
 }

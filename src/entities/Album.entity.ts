@@ -19,4 +19,16 @@ export class Album extends BaseEntity {
   @Field(() => Artist)
   @ManyToOne({ entity: 'Artist' })
   artist = new Collection<Artist>(this);
+
+  @Field()
+  @Property({ type: 'float', columnType: 'numeric(3,1)' })
+  staticRating: number;
+
+  @Field()
+  @Property({ default: 0 })
+  userRatingTotal: number;
+
+  @Field()
+  @Property({ default: 0 })
+  numRatings: number;
 }

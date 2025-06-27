@@ -12,6 +12,7 @@ export class AlbumFactory extends Factory<Album> {
       name: faker.music.album(),
       // Use the assigned artist's year for a realistic release date
       releaseDate: faker.date.between({ from: `${(input.artist as Artist).startYear}-01-01`, to: '2025-01-01' }),
+      staticRating: faker.number.int({ min: 0, max: 5 }),
     };
   }
 }
