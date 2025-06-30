@@ -6,6 +6,7 @@
 type Album {
   artist: Artist!
   createdAt: DateTimeISO!
+  link: String!
   name: String!
   numRatings: Float!
   releaseDate: DateTimeISO!

@@ -144,6 +144,16 @@
           "nullable": false,
           "mappedType": "uuid"
         },
+        "link": {
+          "name": "link",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 255,
+          "mappedType": "string"
+        },
         "static_rating": {
           "name": "static_rating",
           "type": "numeric(3,1)",

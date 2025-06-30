@@ -21,6 +21,10 @@ export class Album extends BaseEntity {
   artist = new Collection<Artist>(this);
 
   @Field()
+  @Property()
+  link: string;
+
+  @Field()
   @Property({ type: 'float', columnType: 'numeric(3,1)' })
   staticRating: number;
 
