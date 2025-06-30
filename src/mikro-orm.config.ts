@@ -17,6 +17,7 @@ const OrmConfig: Options = {
   debug: true,
   highlighter: new SqlHighlighter(),
   extensions: [Migrator, SeedManager],
+  driverOptions: { connection: { ssl: true } },
 };
 
 if (process.env.DATABASE_URL) {
