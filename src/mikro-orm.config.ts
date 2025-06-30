@@ -17,11 +17,12 @@ const OrmConfig: Options = {
   debug: true,
   highlighter: new SqlHighlighter(),
   extensions: [Migrator, SeedManager],
-  driverOptions: { connection: { ssl: true } },
 };
 
 if (process.env.DATABASE_URL) {
   OrmConfig.clientUrl = process.env.DATABASE_URL;
+  OrmConfig.driverOptions = { connection: { ssl: { rejectUnauthorized: false } } };
+  // Recommended by Heroku: https://devcenter.heroku.com/articles/connecting-heroku-postgres#connecting-in-node-js
 } else {
   OrmConfig.user = process.env.MIKRO_ORM_USER;
   OrmConfig.password = process.env.MIKRO_ORM_PASSWORD;
