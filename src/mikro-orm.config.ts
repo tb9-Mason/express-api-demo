@@ -19,8 +19,8 @@ const OrmConfig: Options = {
   extensions: [Migrator, SeedManager],
 };
 
-if (process.env.MIKRO_ORM_CLIENT_URL) {
-  OrmConfig.clientUrl = process.env.MIKRO_ORM_CLIENT_URL;
+if (process.env.DATABASE_URL) {
+  OrmConfig.clientUrl = process.env.DATABASE_URL;
 } else {
   OrmConfig.user = process.env.MIKRO_ORM_USER;
   OrmConfig.password = process.env.MIKRO_ORM_PASSWORD;

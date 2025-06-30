@@ -16,4 +16,4 @@ const schema = buildSchemaSync({
   validate: false,
 });
 
-export const gqlServer = new ApolloServer<GqlContext>({ schema });
+export const gqlServer = new ApolloServer<GqlContext>({ schema, introspection: process.env.NODE_ENV !== 'production' });

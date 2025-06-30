@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "commonjs",
+    "target": "es2022",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "lib": ["es2022", "dom"],
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "outDir": "dist",
+    "types": ["node"]
+  },
+  "include": ["src/**/*"]
+}
