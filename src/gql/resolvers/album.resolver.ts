@@ -1,3 +1,4 @@
+import { Max, Min } from 'class-validator';
 import { GraphQLResolveInfo } from 'graphql';
 import { Arg, Ctx, Field, FieldResolver, Float, Info, InputType, Mutation, Query, Resolver, Root } from 'type-graphql';
 
@@ -11,6 +12,8 @@ class UpdateUserRatingInput {
   uuid: string;
 
   @Field()
+  @Min(1)
+  @Max(5)
   rating: number;
 }
 
@@ -19,7 +22,7 @@ export class AlbumResolver {
   @Query((_returns) => Album, { nullable: true })
   album(@Arg('id', (_type) => String) id: string, @Ctx() { em }: GqlContext, @Info() info: GraphQLResolveInfo) {
     const relations = fieldsToRelations<Album>(info, Album, em);
-    return em.findOne(Album, id, { populate: relations });
+    return em.findOneOrFail(Album, id, { populate: relations });
   }
 
   @Query((_returns) => [Album!]!)
@@ -30,12 +33,9 @@ export class AlbumResolver {
 
   @Mutation((_returns) => Album)
   async updateUserRating(@Arg('data') { uuid, rating }: UpdateUserRatingInput, @Ctx() { em }: GqlContext) {
-    // TODO: need error templates for 404 errors
     const album = await em.findOneOrFail(Album, { uuid });
 
-    // Basic validation that the number is no higher than 5
-    // TODO: add input validations with zod
-    album.userRatingTotal += rating > 5 ? 5 : rating;
+    album.userRatingTotal += rating;
     album.numRatings++;
 
     await em.persistAndFlush(album);

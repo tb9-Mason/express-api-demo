@@ -1,5 +1,6 @@
+import { Dictionary, IPrimaryKeyValue } from '@mikro-orm/core/typings';
 import { Migrator } from '@mikro-orm/migrations';
-import { Options, PostgreSqlDriver } from '@mikro-orm/postgresql';
+import { NotFoundError, Options, PostgreSqlDriver } from '@mikro-orm/postgresql';
 import { SeedManager } from '@mikro-orm/seeder';
 import { SqlHighlighter } from '@mikro-orm/sql-highlighter';
 
@@ -15,6 +16,9 @@ const OrmConfig: Options = {
   entities: ['dist/**/*.entity.js'],
   entitiesTs: ['src/**/*.entity.ts'],
   debug: true,
+  findOneOrFailHandler: (entityName: string, where: IPrimaryKeyValue | Dictionary) => {
+    return new NotFoundError(`${entityName} not found with ${Object.keys(where).join(', ')}`);
+  },
   highlighter: new SqlHighlighter(),
   extensions: [Migrator, SeedManager],
 };

@@ -42,6 +42,7 @@ export async function init(port: string | number = 5000, migrate = true) {
   });
 
   const shutdown = async () => {
+    // TODO: drain the gql server on shutdown: https://go.apollo.dev/s/drain
     await gqlServer.stop();
     console.log('GraphQL server stopped');
     await db.orm.close();

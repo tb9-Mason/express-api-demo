@@ -10,7 +10,7 @@ export class MemberResolver {
   @Query((_returns) => Member, { nullable: true })
   member(@Arg('id', (_type) => String) id: string, @Ctx() { em }: GqlContext, @Info() info: GraphQLResolveInfo) {
     const relations = fieldsToRelations<Member>(info, Member, em);
-    return em.findOne(Member, id, { populate: relations });
+    return em.findOneOrFail(Member, id, { populate: relations });
   }
 
   @Query((_returns) => [Member!]!)

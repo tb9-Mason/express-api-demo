@@ -9,9 +9,8 @@ import fieldsToRelations from '../utilities/fields-to-relations';
 export class ArtistResolver {
   @Query((_returns) => Artist, { nullable: true })
   artist(@Arg('id', (_type) => String) id: string, @Ctx() { em }: GqlContext, @Info() info: GraphQLResolveInfo) {
-    // TODO: change to findOneOrFail and add gql error shapes
     const relations = fieldsToRelations<Artist>(info, Artist, em);
-    return em.findOne(Artist, id, { populate: relations });
+    return em.findOneOrFail(Artist, id, { populate: relations });
   }
 
   @Query((_returns) => [Artist!]!)

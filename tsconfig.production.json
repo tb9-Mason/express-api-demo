@@ -8,7 +8,6 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true,
     "lib": ["es2022", "dom"],
     "noImplicitAny": true,
     "sourceMap": true,
